@@ -1,11 +1,10 @@
 import { useState } from 'react'
-import FormVagas from '../../components/FormVagas'
+import styled from 'styled-components'
 
+import FormVagas from '../../components/FormVagas'
 import Vaga from '../../components/Vaga'
 
-import styles from './ListaVagas.module.css'
-
-type Vaga = {
+type VagaType = {
   id: string
   titulo: string
   localizacao: string
@@ -16,9 +15,9 @@ type Vaga = {
   requisitos: string[]
 }
 
-const vagas = [
+const vagas: VagaType[] = [
   {
-    id: 1,
+    id: '1',
     titulo: 'Desenvolvedor front-end',
     localizacao: 'remoto',
     nivel: 'junior',
@@ -28,7 +27,7 @@ const vagas = [
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
-    id: 2,
+    id: '2',
     titulo: 'Desenvolvedor NodeJS',
     localizacao: 'remoto',
     nivel: 'pleno',
@@ -38,7 +37,7 @@ const vagas = [
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
-    id: 3,
+    id: '3',
     titulo: 'Desenvolvedor fullstack',
     localizacao: 'remoto',
     nivel: 'pleno',
@@ -48,7 +47,7 @@ const vagas = [
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
-    id: 4,
+    id: '4',
     titulo: 'Designer de interfaces',
     localizacao: 'remoto',
     nivel: 'junior',
@@ -58,7 +57,7 @@ const vagas = [
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
-    id: 5,
+    id: '5',
     titulo: 'Desenvolvedor front-end',
     localizacao: 'remoto',
     nivel: 'senior',
@@ -68,7 +67,7 @@ const vagas = [
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
-    id: 6,
+    id: '6',
     titulo: 'Desenvolvedor front-end para projeto internacional',
     localizacao: 'remoto',
     nivel: 'senior',
@@ -78,7 +77,7 @@ const vagas = [
     requisitos: ['HTML', 'CSS', 'JavaScript', 'jQuery']
   },
   {
-    id: 7,
+    id: '7',
     titulo: 'Desenvolvedor front-end',
     localizacao: 'São Paulo/SP',
     nivel: 'junior',
@@ -97,9 +96,9 @@ const ListaVagas = () => {
   )
 
   return (
-    <div>
+    <Container>
       <FormVagas aoPesquisar={(termo: string) => setFiltro(termo)} />
-      <ul className={styles.vagas}>
+      <VagasList>
         {vagasFiltradas.map((vag) => (
           <Vaga
             key={vag.id}
@@ -112,9 +111,26 @@ const ListaVagas = () => {
             requisitos={vag.requisitos}
           />
         ))}
-      </ul>
-    </div>
+      </VagasList>
+    </Container>
   )
 }
 
 export default ListaVagas
+
+// ==================== Styled Components ====================
+const Container = styled.div`
+  width: 100%;
+`
+
+const VagasList = styled.ul`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 16px;
+  row-gap: 16px;
+  margin-top: 32px;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`
